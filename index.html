@@ -22,6 +22,10 @@
             --amber: #ffb800;
             --amber-dim: rgba(255, 184, 0, 0.7);
             --red-alert: #ff2222;
+            --cyan: #00d4ff;
+            --cyan-dim: rgba(0, 212, 255, 0.7);
+            --cyan-faint: rgba(0, 212, 255, 0.08);
+            --cyan-border: rgba(0, 212, 255, 0.25);
             --text-primary: #c8f0c8;
             --text-secondary: #6a9e6a;
             --text-muted: #3a5c3a;
@@ -481,9 +485,16 @@
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
             margin-top: 3rem;
+        }
+
+        @media (max-width: 1100px) {
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .skills-grid { grid-template-columns: 1fr; }
         }
 
         .skill-category {
@@ -515,7 +526,7 @@
             padding: 0.5rem 0;
             color: var(--text-secondary);
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.85rem;
+            font-size: 0.90rem;
             position: relative;
             padding-left: 1.5rem;
             border-bottom: 1px dotted rgba(0,255,65,0.05);
@@ -649,7 +660,6 @@
             margin-top: 3rem;
         }
 
-        /* Carte engagement : texte à gauche, photo(s) à droite */
         .engagement-card {
             background: var(--bg-card);
             border: 1px solid var(--green-border);
@@ -696,7 +706,6 @@
         .engagement-text li::before { content: '>'; position: absolute; left: 0; color: var(--green-primary); }
         .engagement-card:hover .engagement-text li { color: var(--text-primary); }
 
-        /* Colonne photo(s) à droite */
         .engagement-photos {
             width: 220px;
             flex-shrink: 0;
@@ -719,6 +728,237 @@
             object-fit: cover;
             display: block;
         }
+
+        /* ====== TRYHACKME SECTION ====== */
+        .thm-wrapper {
+            background: linear-gradient(135deg, rgba(0,212,255,0.03) 0%, rgba(0,255,65,0.02) 100%);
+            border: 1px solid var(--cyan-border);
+            border-radius: 4px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .thm-wrapper::before {
+            content: 'THM.CERTIFICATIONS // DOSSIER ACTIF';
+            position: absolute;
+            top: -10px; left: 30px;
+            background: var(--bg-base);
+            padding: 0 1rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--cyan);
+            letter-spacing: 3px;
+        }
+        .thm-wrapper .hud-corner { border-color: var(--cyan) !important; }
+        .thm-certs-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .cert-card {
+            background: var(--bg-card);
+            border: 1px solid var(--cyan-border);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .cert-card:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 0 30px rgba(0,212,255,0.1);
+            transform: translateY(-3px);
+        }
+        .cert-header {
+            padding: 1rem 1.5rem;
+            background: rgba(0,212,255,0.05);
+            border-bottom: 1px solid var(--cyan-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cert-id { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--cyan-dim); letter-spacing: 2px; }
+        .cert-badge {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--green-primary);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .cert-badge::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--green-primary);
+            box-shadow: 0 0 4px var(--green-primary);
+        }
+        .cert-img-zone {
+            width: 100%;
+            height: 200px;
+            background: #070e07;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cert-img-zone img { width: 100%; height: 100%; object-fit: contain; padding: 0.5rem; }
+        .cert-img-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
+        .cert-img-placeholder .placeholder-icon { font-size: 2.5rem; opacity: 0.4; }
+        .cert-img-zone::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,212,255,0.07), transparent);
+            animation: sweepCyan 5s ease-in-out infinite;
+        }
+        @keyframes sweepCyan { 0% { left: -100%; } 100% { left: 200%; } }
+        .cert-info { padding: 1.2rem 1.5rem; }
+        .cert-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.90rem;
+            font-weight: 700;
+            color: var(--cyan);
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        .cert-platform { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 2px; }
+        .thm-modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+        .thm-module {
+            background: var(--bg-card);
+            border: 1px solid rgba(0,212,255,0.15);
+            border-radius: 4px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .thm-module::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 100%;
+            background: var(--cyan);
+            box-shadow: 0 0 8px var(--cyan);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.3s ease;
+        }
+        .thm-module:hover::before { transform: scaleY(1); }
+        .thm-module:hover { border-color: var(--cyan-border); background: rgba(0,212,255,0.04); }
+        .thm-module-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.80rem;
+            font-weight: 600;
+            color: var(--cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid rgba(0,212,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .thm-skill-list { list-style: none; }
+        .thm-skill-list li {
+            padding: 0.35rem 0;
+            color: var(--text-secondary);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.90rem;
+            position: relative;
+            padding-left: 1.4rem;
+            border-bottom: 1px dotted rgba(0,212,255,0.05);
+            transition: color 0.3s;
+        }
+        .thm-skill-list li:last-child { border-bottom: none; }
+        .thm-skill-list li::before { content: '>'; position: absolute; left: 0; color: var(--cyan); opacity: 0.7; }
+        .thm-module:hover .thm-skill-list li { color: var(--text-primary); }
+        .thm-tools-section { margin-bottom: 2.5rem; }
+        .thm-sub-title {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.90rem;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .thm-sub-title::before { content: '>> '; color: var(--cyan); }
+        .tools-cloud { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .tool-tag {
+            padding: 0.35rem 0.9rem;
+            background: rgba(0,212,255,0.05);
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 2px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: var(--cyan-dim);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        .tool-tag:hover { background: rgba(0,212,255,0.12); border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 8px rgba(0,212,255,0.2); }
+        .thm-roadmap {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,184,0,0.25);
+            border-radius: 4px;
+            padding: 1.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .thm-roadmap::before {
+            content: 'PROCHAINE MISSION';
+            position: absolute;
+            top: -10px; left: 20px;
+            background: var(--bg-base);
+            padding: 0 0.8rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--amber);
+            letter-spacing: 3px;
+        }
+        .roadmap-content { display: flex; align-items: center; gap: 2rem; }
+        .roadmap-icon { font-size: 3rem; filter: drop-shadow(0 0 12px rgba(255,184,0,0.5)); flex-shrink: 0; }
+        .roadmap-text { flex: 1; }
+        .roadmap-cert-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--amber);
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255,184,0,0.4);
+            margin-bottom: 0.4rem;
+        }
+        .roadmap-cert-full { font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: var(--text-muted); letter-spacing: 2px; margin-bottom: 1rem; }
+        .roadmap-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        .roadmap-status { display: flex; align-items: center; gap: 0.8rem; margin-top: 1rem; flex-wrap: wrap; }
+        .status-pill { padding: 0.3rem 0.9rem; border-radius: 2px; font-family: 'Share Tech Mono', monospace; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; }
+        .status-pill.in-progress { background: rgba(255,184,0,0.1); border: 1px solid rgba(255,184,0,0.4); color: var(--amber); }
+        .status-pill.target { background: rgba(0,212,255,0.07); border: 1px solid rgba(0,212,255,0.2); color: var(--cyan-dim); font-size: 0.65rem; }
+        .roadmap-progress { margin-top: 1.2rem; }
+        .progress-label { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--text-muted); letter-spacing: 2px; margin-bottom: 0.5rem; display: flex; justify-content: space-between; }
+        .progress-track { height: 4px; background: rgba(255,184,0,0.1); border: 1px solid rgba(255,184,0,0.2); border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--amber), #ffdd00); box-shadow: 0 0 8px rgba(255,184,0,0.5); border-radius: 2px; animation: progressAnim 2s ease-out forwards; }
+        @keyframes progressAnim { from { width: 0%; } to { width: 15%; } }
+        #tryhackme .section-title::after { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+        @media (max-width: 968px) { .thm-wrapper { padding: 2rem 1.5rem; } .roadmap-content { flex-direction: column; } }
 
         /* CONTACT */
         .contact-section {
@@ -855,6 +1095,8 @@
             .engagement-card { flex-direction: column; }
             .engagement-photos { width: 100%; flex-direction: row; height: 200px; }
             .engagement-photos .eng-photo { flex: 1; }
+            .thm-wrapper { padding: 2rem 1.5rem; }
+            .roadmap-content { flex-direction: column; }
         }
     </style>
 </head>
@@ -865,14 +1107,15 @@
             <a href="#" class="logo">NC.EXE</a>
             <ul class="nav-links">
                 <li><a href="#about" class="active">PROFIL</a></li>
-                <li><a href="#skills">CAPACITÉS</a></li>
-                <li><a href="#projects">OPÉRATIONS</a></li>
+                <li><a href="#skills">CAPACIT&#xC9;S</a></li>
+                <li><a href="#projects">OP&#xC9;RATIONS</a></li>
+                <li><a href="#tryhackme">TRYHACKME</a></li>
                 <li><a href="#engagement">ENGAGEMENT</a></li>
                 <li><a href="#contact">CONTACT</a></li>
             </ul>
             <div class="nav-status">
                 <div class="status-dot"></div>
-                <span>SYSTÈME EN LIGNE</span>
+                <span>SYST&#xC8;ME EN LIGNE</span>
             </div>
         </nav>
     </div>
@@ -880,15 +1123,15 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <div class="hero-tag">Étudiant Ingénieur ESIEA</div>
+                <div class="hero-tag">&#xC9;tudiant Ing&#xE9;nieur ESIEA</div>
                 <h1>NOLAN<br><span class="green">COSSAIS</span><span class="cursor"></span></h1>
-                <div class="hero-role">CYBERSÉCURITÉ // ARMÉE // INGÉNIERIE</div>
+                <div class="hero-role">CYBERS&#xC9;CURIT&#xC9; // ARM&#xC9;E // ING&#xC9;NIERIE</div>
                 <p class="hero-desc">
-                    Passionné par la cybersécurité et le monde militaire, je développe une expertise technique rigoureuse tout en cultivant un sens aigu du leadership et de l'engagement collectif.
+                    Passionn&#xE9; par la cybers&#xE9;curit&#xE9; et le monde militaire, je d&#xE9;veloppe une expertise technique rigoureuse tout en cultivant un sens aigu du leadership et de l'engagement collectif.
                 </p>
                 <div class="hero-cta">
-                    <a href="#projects" class="btn-primary">VOIR LES OPÉRATIONS</a>
-                    <a href="#contact" class="btn-secondary">ÉTABLIR LE CONTACT</a>
+                    <a href="#projects" class="btn-primary">VOIR LES OP&#xC9;RATIONS</a>
+                    <a href="#contact" class="btn-secondary">&#xC9;TABLIR LE CONTACT</a>
                 </div>
             </div>
 
@@ -902,15 +1145,15 @@
                     <div class="hud-data">
                         <div class="hud-row">
                             <span class="hud-key">STATUT</span>
-                            <span class="hud-val online">● EN RECHERCHE</span>
+                            <span class="hud-val online">&#x25CF; EN RECHERCHE</span>
                         </div>
                         <div class="hud-row">
-                            <span class="hud-key">ÉCOLE</span>
+                            <span class="hud-key">&#xC9;COLE</span>
                             <span class="hud-val">ESIEA</span>
                         </div>
                         <div class="hud-row">
                             <span class="hud-key">SECTEUR</span>
-                            <span class="hud-val amber">ÎLE-DE-FRANCE</span>
+                            <span class="hud-val amber">&#xCE;LE-DE-FRANCE</span>
                         </div>
                         <div class="hud-row">
                             <span class="hud-key">LANGUE</span>
@@ -937,85 +1180,161 @@
 
         <section id="about">
             <div class="section-header">
-                <div class="section-tag">DOSSIER 001 — PROFIL OPÉRATEUR</div>
-                <h2 class="section-title">CE QUI ME DÉFINIT</h2>
+                <div class="section-tag">DOSSIER 001 &mdash; PROFIL OP&#xC9;RATEUR</div>
+                <h2 class="section-title">CE QUI ME D&#xC9;FINIT</h2>
             </div>
             <div class="about-grid">
                 <div class="about-card">
                     <div class="card-num">// 01</div>
-                    <div class="icon">🎯</div>
+                    <div class="icon">&#x1F3AF;</div>
                     <h3>Management</h3>
-                    <p>Mon implication dans divers projets en équipe m'a permis de développer un fort attrait pour le leadership et l'organisation de projets complexes. La gestion du stress, l'encadrement des tâches et la communication efficace sont des compétences que j'ai pu cultiver au fil de mes expériences.</p>
+                    <p>Mon implication dans divers projets en &#xE9;quipe m'a permis de d&#xE9;velopper un fort attrait pour le leadership et l'organisation de projets complexes. La gestion du stress, l'encadrement des t&#xE2;ches et la communication efficace sont des comp&#xE9;tences que j'ai pu cultiver au fil de mes exp&#xE9;riences.</p>
                 </div>
                 <div class="about-card">
                     <div class="card-num">// 02</div>
-                    <div class="icon">🌱</div>
-                    <h3>L'Échec</h3>
-                    <p>L'échec est un élément essentiel en toute situation. Lorsqu'il est bien pris en compte, il devient une source d'apprentissage et de croissance. J'ai appris à analyser mes erreurs avec objectivité et à en tirer des enseignements concrets qui me permettent de progresser.</p>
+                    <div class="icon">&#x1F331;</div>
+                    <h3>L'&#xC9;chec</h3>
+                    <p>L'&#xE9;chec est un &#xE9;l&#xE9;ment essentiel en toute situation. Lorsqu'il est bien pris en compte, il devient une source d'apprentissage et de croissance. J'ai appris &#xE0; analyser mes erreurs avec objectivit&#xE9; et &#xE0; en tirer des enseignements concrets qui me permettent de progresser.</p>
                 </div>
                 <div class="about-card">
                     <div class="card-num">// 03</div>
-                    <div class="icon">🔧</div>
-                    <h3>Gain d'Expérience</h3>
-                    <p>Chaque projet est un point d'évolution dans mon parcours. Ma participation active au monde associatif (Président du BDA et responsable évènement du BDE) de l'ESIEA, en parallèle de mes études, m'a permis de développer une solide expérience de gestion et d'organisation.</p>
+                    <div class="icon">&#x1F527;</div>
+                    <h3>Gain d'Exp&#xE9;rience</h3>
+                    <p>Chaque projet est un point d'&#xE9;volution dans mon parcours. Ma participation active au monde associatif (Pr&#xE9;sident du BDA et responsable &#xE9;v&#xE8;nement du BDE) de l'ESIEA, en parall&#xE8;le de mes &#xE9;tudes, m'a permis de d&#xE9;velopper une solide exp&#xE9;rience de gestion et d'organisation.</p>
                 </div>
             </div>
         </section>
 
         <section id="skills">
             <div class="section-header">
-                <div class="section-tag">DOSSIER 002 — CAPACITÉS TECHNIQUES</div>
-                <h2 class="section-title">COMPÉTENCES</h2>
+                <div class="section-tag">DOSSIER 002 &mdash; CAPACIT&#xC9;S TECHNIQUES</div>
+                <h2 class="section-title">COMP&#xC9;TENCES</h2>
             </div>
             <div class="skills-grid">
+
+                <!-- COL 1, ROW 1 : Électronique -->
                 <div class="skill-category">
-                    <h3>⚙️ Électronique</h3>
+                    <h3>&#x2699;&#xFE0F; &#xC9;lectronique</h3>
                     <ul>
                         <li>Arduino / STM32 / Raspberry Pi</li>
                         <li>Architecture microprocesseur</li>
                         <li>Fritzing</li>
                         <li>Conception de circuits simples</li>
+                        <li>Capteurs &amp; actionneurs</li>
+                        <li>Protocoles I2C / SPI / UART</li>
                     </ul>
                 </div>
-                <div class="skill-category">
-                    <h3>🛡️ Cyber &amp; Armée</h3>
+
+                <!-- COL 2, ROW 1+2 : Cyber & Sécurité (span 2 rows) -->
+                <div class="skill-category" style="grid-row: span 2;">
+                    <h3>&#x1F6E1;&#xFE0F; Cyber &amp; S&#xE9;curit&#xE9;</h3>
                     <ul>
-                        <li>TryHackMe</li>
+                        <li>TryHackMe — Pre Security &#x2705;</li>
+                        <li>TryHackMe — CyberSecurity 101 &#x2705;</li>
+                        <li>Jr Pentester PT1 — en cours &#x23F3;</li>
+                        <li>Reconnaissance active &amp; passive (OSINT)</li>
+                        <li>Scanning &amp; &#xE9;num&#xE9;ration (Nmap, Gobuster)</li>
+                        <li>Exploitation web — OWASP Top 10</li>
+                        <li>Injection SQL &amp; XSS</li>
+                        <li>Cryptographie, hachage, PKI</li>
+                        <li>Analyse de trafic (Wireshark, tcpdump)</li>
+                        <li>Administration Linux offensive</li>
+                        <li>Reverse shells &amp; post-exploitation</li>
+                        <li>Privil&#xE8;ge escalation — bases</li>
+                        <li>Mod&#xE8;les OSI / TCP-IP (couches 1&#x2192;7)</li>
+                        <li>Protocoles DNS, HTTP/S, DHCP, ARP</li>
+                        <li>Adressage IP, sous-r&#xE9;seaux, CIDR</li>
+                        <li>Cisco &amp; Computer Network</li>
+                        <li>Firewall, IDS/IPS, notions SIEM</li>
+                        <li>R&#xE9;ponse &#xE0; incident — bases</li>
+                    </ul>
+                </div>
+
+                <!-- COL 3, ROW 1 : Armée & Opérationnel -->
+                <div class="skill-category">
+                    <h3>&#x1F396;&#xFE0F; Arm&#xE9;e &amp; Op&#xE9;rationnel</h3>
+                    <ul>
                         <li>Formation militaire JSPP</li>
-                        <li>Stages à la BSPP</li>
-                        <li>Cisco / Wireshark</li>
-                        <li>Computer Network</li>
-                        <li>Linux</li>
+                        <li>Stages &#xE0; la BSPP (3 ans)</li>
+                        <li>Porte-drapeau L&#xE9;gion d'Honneur</li>
+                        <li>Secours &#xE0; victime (SAV)</li>
+                        <li>Gestion de crise &amp; stress</li>
+                        <li>Encadrement &amp; commandement</li>
+                        <li>Protocoles d'intervention</li>
+                        <li>Travail en environnement contraint</li>
+                        <li>Discipline, rigueur, sang-froid</li>
                     </ul>
                 </div>
+
+                <!-- COL 4, ROW 1 : Programmation Bas niveau -->
                 <div class="skill-category">
-                    <h3>💻 Programmation</h3>
+                    <h3>&#x1F4BB; Programmation — Syst&#xE8;me &amp; Bas niveau</h3>
                     <ul>
-                        <li>Python</li>
-                        <li>Langage C</li>
-                        <li>Java (POO)</li>
+                        <li>Langage C — syst&#xE8;me &amp; embarqu&#xE9;</li>
                         <li>Assembleur ARM</li>
-                        <li>SQL</li>
-                        <li>Bash &amp; Scripts</li>
-                        <li>OCaml</li>
+                        <li>OCaml — programmation fonctionnelle</li>
+                        <li>Bash &amp; scripts shell</li>
+                        <li>Python — scripting, automatisation, r&#xE9;seau</li>
+                        <li>Gestion m&#xE9;moire, pointeurs, structures</li>
+                        <li>Makefile &amp; compilation</li>
                     </ul>
                 </div>
+
+                <!-- COL 1, ROW 2 : Outils Cyber & Systèmes -->
                 <div class="skill-category">
-                    <h3>🛠️ Outils &amp; Méthodes</h3>
+                    <h3>&#x1F4E1; Outils cyber &amp; syst&#xE8;mes</h3>
                     <ul>
-                        <li>Git / GitHub</li>
-                        <li>Agile / SMART</li>
-                        <li>Microsoft 365</li>
-                        <li>MySQL / ORACLE</li>
-                        <li>Eclipse / VsCode</li>
+                        <li>Kali Linux &amp; VirtualBox / VMware</li>
+                        <li>Nmap — scan r&#xE9;seau avanc&#xE9;</li>
+                        <li>Wireshark &amp; tcpdump</li>
+                        <li>Burp Suite — proxy HTTP</li>
+                        <li>Metasploit Framework</li>
+                        <li>Gobuster / Dirb — enum web</li>
+                        <li>Hydra / John the Ripper / Hashcat</li>
+                        <li>Netcat &amp; reverse shells</li>
+                        <li>SQLMap, Nikto</li>
+                        <li>CyberChef, GTFOBins</li>
+                        <li>SSH, curl, wget, OpenSSL</li>
+                        <li>TryHackMe AttackBox</li>
                     </ul>
                 </div>
+
+                <!-- COL 3, ROW 2 : Outils de développement -->
+                <div class="skill-category">
+                    <h3>&#x1F6E0;&#xFE0F; Outils de d&#xE9;veloppement</h3>
+                    <ul>
+                        <li>Git &amp; GitHub — versioning, branches, PR</li>
+                        <li>VS Code / Eclipse / IntelliJ IDEA</li>
+                        <li>Maven &amp; gestion de d&#xE9;pendances Java</li>
+                        <li>Raylib — moteur graphique C</li>
+                        <li>Fritzing — conception &#xE9;lectronique</li>
+                        <li>Agile / SMART / Kanban</li>
+                        <li>Microsoft 365 &amp; Teams</li>
+                        <li>Notion / Trello</li>
+                    </ul>
+                </div>
+
+                <!-- COL 4, ROW 2 : Programmation Haut niveau & Web -->
+                <div class="skill-category">
+                    <h3>&#x1F5A5;&#xFE0F; Programmation — Haut niveau &amp; Web</h3>
+                    <ul>
+                        <li>Java — POO avanc&#xE9;e, design patterns</li>
+                        <li>JavaScript — DOM, &#xE9;v&#xE9;nements, fetch API</li>
+                        <li>HTML5 &amp; CSS3 — s&#xE9;mantique, responsive</li>
+                        <li>SQL — requ&#xEA;tes complexes, jointures, vues</li>
+                        <li>MySQL / ORACLE</li>
+                        <li>Notions TypeScript</li>
+                        <li>API REST &amp; format JSON</li>
+                        <li>Architecture client-serveur</li>
+                    </ul>
+                </div>
+
             </div>
         </section>
 
         <section id="projects">
             <div class="section-header">
-                <div class="section-tag">DOSSIER 003 — JOURNAL DES OPÉRATIONS</div>
+                <div class="section-tag">DOSSIER 003 &mdash; JOURNAL DES OP&#xC9;RATIONS</div>
                 <h2 class="section-title">PROJETS</h2>
             </div>
             <div class="projects-grid">
@@ -1023,10 +1342,10 @@
                 <div class="project-card">
                     <div class="project-header">
                         <div class="project-id">OPS-001 // ROBOTIQUE</div>
-                        <div class="project-status">COMPLÉTÉ</div>
+                        <div class="project-status">COMPL&#xC9;T&#xC9;</div>
                     </div>
                     <div class="project-icon-row">
-                        <div class="project-emoji">🤖</div>
+                        <div class="project-emoji">&#x1F916;</div>
                         <div class="project-bar-group">
                             <div class="project-bar"><div class="project-bar-fill" style="width:90%"></div></div>
                             <div class="project-bar"><div class="project-bar-fill" style="width:75%"></div></div>
@@ -1034,12 +1353,12 @@
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3>Challenge Jeux Olympiques ESIEA 🏆</h3>
-                        <p>Conception d'un robot autonome avec 3 défis : précision (tir de balles via QR Code), force (traction sur distance maximale) et coordination (danse synchronisée entre robots).</p>
+                        <h3>Challenge Jeux Olympiques ESIEA &#x1F3C6;</h3>
+                        <p>Conception d'un robot autonome avec 3 d&#xE9;fis : pr&#xE9;cision (tir de balles via QR Code), force (traction sur distance maximale) et coordination (danse synchronis&#xE9;e entre robots).</p>
                         <div class="project-tags">
                             <span class="tag">LANGAGE C</span>
                             <span class="tag">ROBOTIQUE</span>
-                            <span class="tag">CRÉATIVITÉ</span>
+                            <span class="tag">CR&#xC9;ATIVIT&#xC9;</span>
                         </div>
                     </div>
                 </div>
@@ -1047,10 +1366,10 @@
                 <div class="project-card">
                     <div class="project-header">
                         <div class="project-id">OPS-002 // ALGO</div>
-                        <div class="project-status">COMPLÉTÉ</div>
+                        <div class="project-status">COMPL&#xC9;T&#xC9;</div>
                     </div>
                     <div class="project-icon-row">
-                        <div class="project-emoji">🌩️</div>
+                        <div class="project-emoji">&#x1F329;&#xFE0F;</div>
                         <div class="project-bar-group">
                             <div class="project-bar"><div class="project-bar-fill" style="width:80%"></div></div>
                             <div class="project-bar"><div class="project-bar-fill" style="width:85%"></div></div>
@@ -1058,8 +1377,8 @@
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3>Tempête Solaire</h3>
-                        <p>Représentation graphique et gestion dynamique de l'envoi de ressources vers différentes stations endommagées. Utilisation des graphes pour modéliser les connexions et optimiser les flux.</p>
+                        <h3>Temp&#xEA;te Solaire</h3>
+                        <p>Repr&#xE9;sentation graphique et gestion dynamique de l'envoi de ressources vers diff&#xE9;rentes stations endommag&#xE9;es. Utilisation des graphes pour mod&#xE9;liser les connexions et optimiser les flux.</p>
                         <div class="project-tags">
                             <span class="tag">C / JAVA</span>
                             <span class="tag">GRAPHES</span>
@@ -1072,10 +1391,10 @@
                 <div class="project-card">
                     <div class="project-header">
                         <div class="project-id">OPS-003 // FORENSICS</div>
-                        <div class="project-status">COMPLÉTÉ</div>
+                        <div class="project-status">COMPL&#xC9;T&#xC9;</div>
                     </div>
                     <div class="project-icon-row">
-                        <div class="project-emoji">🔍</div>
+                        <div class="project-emoji">&#x1F50D;</div>
                         <div class="project-bar-group">
                             <div class="project-bar"><div class="project-bar-fill" style="width:95%"></div></div>
                             <div class="project-bar"><div class="project-bar-fill" style="width:80%"></div></div>
@@ -1083,8 +1402,8 @@
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3>Data Recovery — Projet PST</h3>
-                        <p>Récupération de données bas-niveau par comparaison des métadonnées avec les partitions. Identification des fichiers supprimés et restauration vers un serveur sécurisé.</p>
+                        <h3>Data Recovery &mdash; Projet PST</h3>
+                        <p>R&#xE9;cup&#xE9;ration de donn&#xE9;es bas-niveau par comparaison des m&#xE9;tadonn&#xE9;es avec les partitions. Identification des fichiers supprim&#xE9;s et restauration vers un serveur s&#xE9;curis&#xE9;.</p>
                         <div class="project-tags">
                             <span class="tag">SERVEUR</span>
                             <span class="tag">C / JAVA</span>
@@ -1097,10 +1416,10 @@
                 <div class="project-card">
                     <div class="project-header">
                         <div class="project-id">OPS-004 // SIMULATION</div>
-                        <div class="project-status">COMPLÉTÉ</div>
+                        <div class="project-status">COMPL&#xC9;T&#xC9;</div>
                     </div>
                     <div class="project-icon-row">
-                        <div class="project-emoji">🅿️</div>
+                        <div class="project-emoji">&#x1F17F;&#xFE0F;</div>
                         <div class="project-bar-group">
                             <div class="project-bar"><div class="project-bar-fill" style="width:88%"></div></div>
                             <div class="project-bar"><div class="project-bar-fill" style="width:92%"></div></div>
@@ -1109,7 +1428,7 @@
                     </div>
                     <div class="project-content">
                         <h3>Simulateur de Parking Intelligent</h3>
-                        <p>Simulation avec routage automatique et interface graphique temps réel sous Raylib. Animations de déplacement, statistiques d'occupation basées sur l'algorithme de Dijkstra.</p>
+                        <p>Simulation avec routage automatique et interface graphique temps r&#xE9;el sous Raylib. Animations de d&#xE9;placement, statistiques d'occupation bas&#xE9;es sur l'algorithme de Dijkstra.</p>
                         <div class="project-tags">
                             <span class="tag">LANGAGE C</span>
                             <span class="tag">DIJKSTRA</span>
@@ -1122,10 +1441,10 @@
                 <div class="project-card">
                     <div class="project-header">
                         <div class="project-id">OPS-005 // API</div>
-                        <div class="project-status">COMPLÉTÉ</div>
+                        <div class="project-status">COMPL&#xC9;T&#xC9;</div>
                     </div>
                     <div class="project-icon-row">
-                        <div class="project-emoji">🏗️</div>
+                        <div class="project-emoji">&#x1F3D7;&#xFE0F;</div>
                         <div class="project-bar-group">
                             <div class="project-bar"><div class="project-bar-fill" style="width:82%"></div></div>
                             <div class="project-bar"><div class="project-bar-fill" style="width:76%"></div></div>
@@ -1134,7 +1453,7 @@
                     </div>
                     <div class="project-content">
                         <h3>Zone Industrialo-Portuaire</h3>
-                        <p>Serveur externe fournissant des actions et requêtes pour simuler une zone portuaire complexe. Modélisation des interactions entre véhicules et infrastructures avec menu dynamique.</p>
+                        <p>Serveur externe fournissant des actions et requ&#xEA;tes pour simuler une zone portuaire complexe. Mod&#xE9;lisation des interactions entre v&#xE9;hicules et infrastructures avec menu dynamique.</p>
                         <div class="project-tags">
                             <span class="tag">JAVA</span>
                             <span class="tag">API</span>
@@ -1147,23 +1466,210 @@
             </div>
         </section>
 
+        <!-- ====== TRYHACKME SECTION ====== -->
+        <section id="tryhackme">
+            <div class="section-header">
+                <div class="section-tag">DOSSIER 004 — CERTIFICATIONS OFFENSIVES</div>
+                <h2 class="section-title">TRYHACKME</h2>
+            </div>
+
+            <div class="thm-wrapper">
+                <div class="hud-corner tl"></div>
+                <div class="hud-corner tr"></div>
+                <div class="hud-corner bl"></div>
+                <div class="hud-corner br"></div>
+
+                <div class="thm-sub-title" style="margin-bottom:1.5rem;">CERTIFICATIONS OBTENUES</div>
+                <div class="thm-certs-row">
+                    <div class="cert-card">
+                        <div class="cert-header">
+                            <div class="cert-id">CERT-001 // PRE-SECURITY</div>
+                            <div class="cert-badge">VALIDÉ</div>
+                        </div>
+                        <div class="cert-img-zone">
+                            <img src="cert_presecurity.png" alt="Certificat TryHackMe Pre Security"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="cert-img-placeholder" style="display:none;">
+                                <div class="placeholder-icon">🏅</div>
+                                <span>cert_presecurity.png</span>
+                            </div>
+                        </div>
+                        <div class="cert-info">
+                            <div class="cert-name">Pre Security</div>
+                            <div class="cert-platform">TRYHACKME // LEARNING PATH</div>
+                        </div>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-header">
+                            <div class="cert-id">CERT-002 // CYBERSECURITY 101</div>
+                            <div class="cert-badge">VALIDÉ</div>
+                        </div>
+                        <div class="cert-img-zone">
+                            <img src="cert_cyber101.png" alt="Certificat TryHackMe CyberSecurity 101"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="cert-img-placeholder" style="display:none;">
+                                <div class="placeholder-icon">🏅</div>
+                                <span>cert_cyber101.png</span>
+                            </div>
+                        </div>
+                        <div class="cert-info">
+                            <div class="cert-name">CyberSecurity 101</div>
+                            <div class="cert-platform">TRYHACKME // LEARNING PATH</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="thm-sub-title">COMPÉTENCES &amp; CONNAISSANCES ACQUISES</div>
+                <div class="thm-modules">
+                    <div class="thm-module">
+                        <div class="thm-module-title"><span class="mod-icon">🌐</span> Réseaux &amp; Protocoles</div>
+                        <ul class="thm-skill-list">
+                            <li>Modèles OSI et TCP/IP</li>
+                            <li>Protocoles : DNS, HTTP/S, DHCP, ARP</li>
+                            <li>Adressage IP, sous-réseaux, CIDR</li>
+                            <li>Protocoles de routage (TCP/UDP)</li>
+                            <li>Analyse de trafic réseau</li>
+                            <li>Ports et services courants</li>
+                            <li>Firewall et règles de filtrage</li>
+                        </ul>
+                    </div>
+                    <div class="thm-module">
+                        <div class="thm-module-title"><span class="mod-icon">🖥</span> Systèmes d'exploitation</div>
+                        <ul class="thm-skill-list">
+                            <li>Navigation et administration Linux</li>
+                            <li>Gestion des permissions (chmod, chown)</li>
+                            <li>Processus, services, cron jobs</li>
+                            <li>Scripting Bash</li>
+                            <li>Environnement Windows (CLI, PowerShell)</li>
+                            <li>Active Directory &mdash; notions de base</li>
+                            <li>Gestion des utilisateurs et groupes</li>
+                        </ul>
+                    </div>
+                    <div class="thm-module">
+                        <div class="thm-module-title"><span class="mod-icon">🔐</span> Cryptographie &amp; Hashing</div>
+                        <ul class="thm-skill-list">
+                            <li>Chiffrement symétrique (AES) et asymétrique (RSA)</li>
+                            <li>Fonctions de hachage : MD5, SHA-256</li>
+                            <li>PKI, certificats TLS/SSL</li>
+                            <li>Authentification &amp; gestion des mots de passe</li>
+                            <li>Encodage Base64</li>
+                            <li>Protocoles sécurisés SSH, HTTPS</li>
+                        </ul>
+                    </div>
+                    <div class="thm-module">
+                        <div class="thm-module-title"><span class="mod-icon">🕵</span> Offensive Security</div>
+                        <ul class="thm-skill-list">
+                            <li>Introduction au pentesting</li>
+                            <li>Reconnaissance active &amp; passive (OSINT)</li>
+                            <li>Scanning de ports et énumération</li>
+                            <li>Exploitation de vulnérabilités basiques</li>
+                            <li>Injection SQL &mdash; notions</li>
+                            <li>XSS et vulnérabilités web courantes</li>
+                            <li>Reverse shells &amp; bind shells</li>
+                        </ul>
+                    </div>
+                    <div class="thm-module">
+                        <div class="thm-module-title"><span class="mod-icon">🛡</span> Défense &amp; Blue Team</div>
+                        <ul class="thm-skill-list">
+                            <li>Analyse de logs système</li>
+                            <li>Détection d'intrusions (IDS/IPS)</li>
+                            <li>Notions de SIEM</li>
+                            <li>Réponse à incident &mdash; bases</li>
+                            <li>Hardening système et réseau</li>
+                            <li>Indicateurs de compromission (IoC)</li>
+                        </ul>
+                    </div>
+                    <div class="thm-module">
+                        <div class="thm-module-title"><span class="mod-icon">🌍</span> Web &amp; Applications</div>
+                        <ul class="thm-skill-list">
+                            <li>Architecture client-serveur</li>
+                            <li>Requêtes HTTP (GET, POST, headers)</li>
+                            <li>Cookies, sessions, authentification web</li>
+                            <li>OWASP Top 10 &mdash; introduction</li>
+                            <li>Directory traversal &amp; file inclusion</li>
+                            <li>Burp Suite &mdash; bases</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="thm-tools-section">
+                    <div class="thm-sub-title">ARSENAL D'OUTILS MAÎTRISÉS</div>
+                    <div class="tools-cloud">
+                        <span class="tool-tag">Nmap</span>
+                        <span class="tool-tag">Wireshark</span>
+                        <span class="tool-tag">Burp Suite</span>
+                        <span class="tool-tag">Metasploit</span>
+                        <span class="tool-tag">Gobuster</span>
+                        <span class="tool-tag">Hydra</span>
+                        <span class="tool-tag">John the Ripper</span>
+                        <span class="tool-tag">Hashcat</span>
+                        <span class="tool-tag">Netcat</span>
+                        <span class="tool-tag">SQLMap</span>
+                        <span class="tool-tag">Nikto</span>
+                        <span class="tool-tag">tcpdump</span>
+                        <span class="tool-tag">dig / nslookup</span>
+                        <span class="tool-tag">curl / wget</span>
+                        <span class="tool-tag">OpenSSL</span>
+                        <span class="tool-tag">SSH</span>
+                        <span class="tool-tag">Kali Linux</span>
+                        <span class="tool-tag">VirtualBox</span>
+                        <span class="tool-tag">TryHackMe AttackBox</span>
+                        <span class="tool-tag">GTFOBins</span>
+                        <span class="tool-tag">CyberChef</span>
+                    </div>
+                </div>
+
+                <div class="thm-roadmap">
+                    <div class="hud-corner tl" style="border-color:var(--amber)"></div>
+                    <div class="hud-corner tr" style="border-color:var(--amber)"></div>
+                    <div class="hud-corner bl" style="border-color:var(--amber)"></div>
+                    <div class="hud-corner br" style="border-color:var(--amber)"></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-icon">🎯</div>
+                        <div class="roadmap-text">
+                            <div class="roadmap-cert-name">JR PENTESTER &mdash; PT1</div>
+                            <div class="roadmap-cert-full">TRYHACKME // JUNIOR PENETRATION TESTER PATH</div>
+                            <p class="roadmap-desc">
+                                Après avoir validé les fondamentaux avec Pre Security et CyberSecurity 101, ma prochaine étape est la certification Jr Pentester (PT1). Ce parcours approfondit les techniques offensives avancées : exploitation de vulnérabilités, post-exploitation, pivoting réseau, et méthodologie complète de test d'intrusion &mdash; compétences directement alignées avec mon orientation vers la cybersécurité offensive.
+                            </p>
+                            <div class="roadmap-status">
+                                <span class="status-pill in-progress">⚡ EN COURS</span>
+                                <span class="status-pill target">CIBLE : 2026</span>
+                            </div>
+                            <div class="roadmap-progress">
+                                <div class="progress-label">
+                                    <span>PROGRESSION</span>
+                                    <span style="color:var(--amber)">~18%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
         <section id="engagement">
             <div class="section-header">
-                <div class="section-tag">DOSSIER 004 — TERRAIN &amp; ENGAGEMENT</div>
+                <div class="section-tag">DOSSIER 005 &mdash; TERRAIN &amp; ENGAGEMENT</div>
                 <h2 class="section-title">MON ENGAGEMENT</h2>
             </div>
 
             <div class="engagement-list">
 
-                <!-- CARTE 1 : Pompier — 1 photo -->
                 <div class="engagement-card">
                     <div class="engagement-text">
-                        <h3>🚒 Brigade de Sapeurs-Pompiers de Paris 🗼</h3>
+                        <h3>&#x1F692; Brigade de Sapeurs-Pompiers de Paris &#x1F5FC;</h3>
                         <ul>
-                            <li>Formation de 3 ans sur le métier de pompier de Paris. Formation militaire avec une spécialisation sur le secours à victime.</li>
-                            <li>Une formation humaine remplie d'expériences et de valeurs fortes. De l'encadrement d'évènements sportifs à l'intervention en civil sur des personnes en détresse, ces 3 années ont été riches en enseignements.</li>
-                            <li>Une formation très fournie en diplômes et en compétences techniques.</li>
-                            <li>Mon comportement exemplaire m'a permis d'être désigné pour devenir porte drapeau de la Légion d'Honneur. J'officie encore aujourd'hui pour les cérémonies et rendez vous des comités du Val de Marne.</li>
+                            <li>Formation de 3 ans sur le m&#xE9;tier de pompier de Paris. Formation militaire avec une sp&#xE9;cialisation sur le secours &#xE0; victime.</li>
+                            <li>Une formation humaine remplie d'exp&#xE9;riences et de valeurs fortes. De l'encadrement d'&#xE9;v&#xE8;nements sportifs &#xE0; l'intervention en civil sur des personnes en d&#xE9;tresse, ces 3 ann&#xE9;es ont &#xE9;t&#xE9; riches en enseignements.</li>
+                            <li>Une formation tr&#xE8;s fournie en dipl&#xF4;mes et en comp&#xE9;tences techniques.</li>
+                            <li>Mon comportement exemplaire m'a permis d'&#xEA;tre d&#xE9;sign&#xE9; pour devenir porte drapeau de la L&#xE9;gion d'Honneur. J'officie encore aujourd'hui pour les c&#xE9;r&#xE9;monies et rendez vous des comit&#xE9;s du Val de Marne.</li>
                         </ul>
                     </div>
                     <div class="engagement-photos">
@@ -1173,13 +1679,12 @@
                     </div>
                 </div>
 
-                <!-- CARTE 2 : Associations — 2 photos empilées -->
                 <div class="engagement-card">
                     <div class="engagement-text">
-                        <h3>👔 Associations de l'ESIEA 🏛️</h3>
+                        <h3>&#x1F454; Associations de l'ESIEA &#x1F3DB;&#xFE0F;</h3>
                         <ul>
-                            <li>Président du Bureau des Arts : Seul, j'ai relancé l'association d'un projet musical. J'ai su attirer de nouveaux membres avec la création d'un atelier musique qui nous a mené à jouer aux Folies Bergères ainsi qu'au Grand Rex (Paris). Aujourd'hui le BDA est l'une des associations les plus actives du campus de Paris. Après deux mandats de présidences, le bilan est simple : 3 nouveaux pôles artistiques construits (cuisine, arts manuels, lecture), le bureau compte plus de membres actifs qu'aucune autre association de l'ESIEA et notre présence est quasi hebdomadaire sur le campus.</li>
-                            <li>Responsable événement du BDE : J'ai encadré pendant 2 ans la réalisation de chaque événement du BDE. Trouver les partenaires, démarcher des contrats, trouver des lieux et des ressources, gérer les budgets, la logistique, le management et la communication — tout cela dans le but d'animer la vie étudiante. Cette mission a été menée avec succès, avec des évènements variés et de qualité allant du week-end d'intégration au gala de fin d'année, en passant par des conférences et des tournois sportifs.</li>
+                            <li>Pr&#xE9;sident du Bureau des Arts : Seul, j'ai relanc&#xE9; l'association d'un projet musical. J'ai su attirer de nouveaux membres avec la cr&#xE9;ation d'un atelier musique qui nous a men&#xE9; &#xE0; jouer aux Folies Berg&#xE8;res ainsi qu'au Grand Rex (Paris). Aujourd'hui le BDA est l'une des associations les plus actives du campus de Paris. Apr&#xE8;s deux mandats de pr&#xE9;sidences, le bilan est simple : 3 nouveaux p&#xF4;les artistiques construits (cuisine, arts manuels, lecture), le bureau compte plus de membres actifs qu'aucune autre association de l'ESIEA et notre pr&#xE9;sence est quasi hebdomadaire sur le campus.</li>
+                            <li>Responsable &#xE9;v&#xE9;nement du BDE : J'ai encadr&#xE9; pendant 2 ans la r&#xE9;alisation de chaque &#xE9;v&#xE9;nement du BDE. Trouver les partenaires, d&#xE9;marcher des contrats, trouver des lieux et des ressources, g&#xE9;rer les budgets, la logistique, le management et la communication &mdash; tout cela dans le but d'animer la vie &#xE9;tudiante.</li>
                         </ul>
                     </div>
                     <div class="engagement-photos">
@@ -1199,12 +1704,12 @@
                 <div class="hud-corner bl"></div>
                 <div class="hud-corner br"></div>
                 <h2 class="contact-title">ENVIE DE TRAVAILLER ENSEMBLE ?</h2>
-                <p class="contact-sub">&gt; RECHERCHE ALTERNANCE — SEPTEMBRE 2026_</p>
-                <a href="mailto:cossais@et.esiea.fr" class="contact-btn">INITIER LA TRANSMISSION</a>
+                <p class="contact-sub">&gt; RECHERCHE ALTERNANCE &mdash; SEPTEMBRE 2026_</p>
+                <a href="/cdn-cgi/l/email-protection#73101c0000121a003316075d16001a16125d1501" class="contact-btn">INITIER LA TRANSMISSION</a>
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <a href="mailto:cossais@et.esiea.fr">cossais@et.esiea.fr</a>
+                        <a href="/cdn-cgi/l/email-protection#d7b4b8a4a4b6bea497b2a3f9b2a4beb2b6f9b1a5"><span class="__cf_email__" data-cfemail="8eede1fdfdefe7fdceebfaa0ebfde7ebefa0e8fc">[email&#160;protected]</span></a>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-linkedin"></i>
@@ -1216,7 +1721,7 @@
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-location-dot"></i>
-                        <span>Île-de-France</span>
+                        <span>&#xCE;le-de-France</span>
                     </div>
                 </div>
             </div>
@@ -1224,12 +1729,12 @@
     </main>
 
     <footer>
-        <p><strong>NOLAN COSSAIS</strong> — ÉTUDIANT INGÉNIEUR ESIEA</p>
-        <p>PRÉSIDENT BDA // RESPONSABLE EVENT BDE // BATTEUR 14 ANS 🥁</p>
-        <p style="margin-top:0.5rem;opacity:0.5;">© 2026 — BILINGUE : FRANÇAIS // ANGLAIS (TOEIC 840)</p>
+        <p><strong>NOLAN COSSAIS</strong> &mdash; &#xC9;TUDIANT ING&#xC9;NIEUR ESIEA</p>
+        <p>PR&#xC9;SIDENT BDA // RESPONSABLE EVENT BDE // BATTEUR 14 ANS &#x1F941;</p>
+        <p style="margin-top:0.5rem;opacity:0.5;">&#xA9; 2026 &mdash; BILINGUE : FRAN&#xC7;AIS // ANGLAIS (TOEIC 840)</p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         const navLinks = document.querySelectorAll('.nav-links a');
         window.addEventListener('scroll', () => {
             let current = '';
