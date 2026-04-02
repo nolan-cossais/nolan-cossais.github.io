@@ -22,6 +22,10 @@
             --amber: #ffb800;
             --amber-dim: rgba(255, 184, 0, 0.7);
             --red-alert: #ff2222;
+            --red-primary: #ff3333;
+            --red-dim: rgba(255, 51, 51, 0.7);
+            --red-faint: rgba(255, 51, 51, 0.06);
+            --red-border: rgba(255, 51, 51, 0.3);
             --cyan: #00d4ff;
             --cyan-dim: rgba(0, 212, 255, 0.7);
             --cyan-faint: rgba(0, 212, 255, 0.08);
@@ -526,7 +530,7 @@
             padding: 0.5rem 0;
             color: var(--text-secondary);
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.90rem;
+            font-size: 0.85rem;
             position: relative;
             padding-left: 1.5rem;
             border-bottom: 1px dotted rgba(0,255,65,0.05);
@@ -652,6 +656,96 @@
         }
         .project-card:hover .tag { border-color: var(--green-border); color: var(--green-primary); }
 
+
+        /* ====== CYBERSHEET CARD ====== */
+        .cybersheet-card {
+            border-color: var(--green-primary) !important;
+            box-shadow: 0 0 40px rgba(0,255,65,0.08), inset 0 0 60px rgba(0,255,65,0.02);
+        }
+        .cybersheet-screenshot {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #040904;
+            border-bottom: 1px solid var(--green-border);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cybersheet-screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+        .cybersheet-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            color: var(--text-muted);
+            font-family: 'Share Tech Mono', monospace;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0; left: 0;
+        }
+        .cs-placeholder-icon { font-size: 3rem; opacity: 0.3; }
+        .cs-placeholder-label { font-size: 0.8rem; letter-spacing: 2px; color: var(--text-muted); }
+        .cs-placeholder-sub { font-size: 0.65rem; letter-spacing: 3px; opacity: 0.5; }
+        .cybersheet-scan {
+            position: absolute;
+            top: -100%; left: 0;
+            width: 100%; height: 40%;
+            background: linear-gradient(to bottom, transparent, rgba(0,255,65,0.04), transparent);
+            animation: csScan 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes csScan { 0% { top: -40%; } 100% { top: 140%; } }
+        .cs-corner { position: absolute; width: 20px; height: 20px; z-index: 2; }
+        .cs-corner.cs-tl { top: 8px; left: 8px; border-top: 2px solid var(--green-primary); border-left: 2px solid var(--green-primary); }
+        .cs-corner.cs-tr { top: 8px; right: 8px; border-top: 2px solid var(--green-primary); border-right: 2px solid var(--green-primary); }
+        .cs-corner.cs-bl { bottom: 8px; left: 8px; border-bottom: 2px solid var(--green-primary); border-left: 2px solid var(--green-primary); }
+        .cs-corner.cs-br { bottom: 8px; right: 8px; border-bottom: 2px solid var(--green-primary); border-right: 2px solid var(--green-primary); }
+        .cs-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin-top: 1.4rem;
+        }
+        .cs-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            padding: 1rem;
+            background: rgba(0,255,65,0.03);
+            border: 1px solid rgba(0,255,65,0.1);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .cybersheet-card:hover .cs-feature { border-color: var(--green-border); background: rgba(0,255,65,0.05); }
+        .cs-feature-icon { font-size: 1.4rem; flex-shrink: 0; line-height: 1; padding-top: 2px; }
+        .cs-feature-title {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--green-primary);
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+        }
+        .cs-feature-desc {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        @media (max-width: 968px) {
+            .cybersheet-card { grid-column: 1 / -1 !important; }
+            .cs-features { grid-template-columns: 1fr; }
+        }
+
         /* ====== ENGAGEMENT ====== */
         .engagement-list {
             display: flex;
@@ -727,7 +821,6 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            object-position: center 20%;
         }
 
         /* ====== TRYHACKME SECTION ====== */
@@ -738,6 +831,17 @@
             padding: 3rem;
             position: relative;
             overflow: hidden;
+        }
+        .thm-wrapper::before {
+            content: 'THM.CERTIFICATIONS // DOSSIER ACTIF';
+            position: absolute;
+            top: -10px; left: 30px;
+            background: var(--bg-base);
+            padding: 0 1rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--cyan);
+            letter-spacing: 3px;
         }
         .thm-wrapper .hud-corner { border-color: var(--cyan) !important; }
         .thm-certs-row {
@@ -817,7 +921,7 @@
         .cert-info { padding: 1.2rem 1.5rem; }
         .cert-name {
             font-family: 'Orbitron', monospace;
-            font-size: 0.90rem;
+            font-size: 0.85rem;
             font-weight: 700;
             color: var(--cyan);
             letter-spacing: 1px;
@@ -855,7 +959,7 @@
         .thm-module:hover { border-color: var(--cyan-border); background: rgba(0,212,255,0.04); }
         .thm-module-title {
             font-family: 'Orbitron', monospace;
-            font-size: 0.80rem;
+            font-size: 0.7rem;
             font-weight: 600;
             color: var(--cyan);
             letter-spacing: 2px;
@@ -872,7 +976,7 @@
             padding: 0.35rem 0;
             color: var(--text-secondary);
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.90rem;
+            font-size: 0.78rem;
             position: relative;
             padding-left: 1.4rem;
             border-bottom: 1px dotted rgba(0,212,255,0.05);
@@ -884,7 +988,7 @@
         .thm-tools-section { margin-bottom: 2.5rem; }
         .thm-sub-title {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.90rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -898,7 +1002,7 @@
             border: 1px solid rgba(0,212,255,0.2);
             border-radius: 2px;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.85rem;
+            font-size: 0.72rem;
             letter-spacing: 1px;
             color: var(--cyan-dim);
             transition: all 0.3s ease;
@@ -913,7 +1017,17 @@
             position: relative;
             overflow: hidden;
         }
-        
+        .thm-roadmap::before {
+            content: 'PROCHAINE MISSION';
+            position: absolute;
+            top: -10px; left: 20px;
+            background: var(--bg-base);
+            padding: 0 0.8rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--amber);
+            letter-spacing: 3px;
+        }
         .roadmap-content { display: flex; align-items: center; gap: 2rem; }
         .roadmap-icon { font-size: 3rem; filter: drop-shadow(0 0 12px rgba(255,184,0,0.5)); flex-shrink: 0; }
         .roadmap-text { flex: 1; }
@@ -938,6 +1052,60 @@
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--amber), #ffdd00); box-shadow: 0 0 8px rgba(255,184,0,0.5); border-radius: 2px; animation: progressAnim 2s ease-out forwards; }
         @keyframes progressAnim { from { width: 0%; } to { width: 15%; } }
         #tryhackme .section-title::after { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+
+        /* ====== RED TEAM CERTS ====== */
+        .cert-card.red { border-color: var(--red-border); }
+        .cert-card.red:hover { border-color: var(--red-primary); box-shadow: 0 0 30px rgba(255,51,51,0.12); }
+        .cert-card.red .cert-header { background: rgba(255,51,51,0.05); border-bottom-color: var(--red-border); }
+        .cert-card.red .cert-id { color: var(--red-dim); }
+        .cert-card.red .cert-badge { color: var(--red-primary); }
+        .cert-card.red .cert-badge::before { background: var(--red-primary); box-shadow: 0 0 4px var(--red-primary); }
+        .cert-card.red .cert-img-zone::after { background: linear-gradient(90deg, transparent, rgba(255,51,51,0.07), transparent); }
+        .cert-card.red .cert-name { color: var(--red-primary); }
+        @keyframes sweepRed { 0% { left: -100%; } 100% { left: 200%; } }
+        .cert-card.red .cert-img-zone::after { animation: sweepRed 5s ease-in-out infinite; }
+
+        .thm-module.red { border-color: rgba(255,51,51,0.2); }
+        .thm-module.red::before { background: var(--red-primary); box-shadow: 0 0 8px var(--red-primary); }
+        .thm-module.red:hover { border-color: var(--red-border); background: rgba(255,51,51,0.04); }
+        .thm-module.red .thm-module-title { color: var(--red-primary); border-bottom-color: rgba(255,51,51,0.15); }
+        .thm-module.red .thm-skill-list li { border-bottom-color: rgba(255,51,51,0.07); }
+        .thm-module.red .thm-skill-list li::before { color: var(--red-primary); }
+
+        .thm-section-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2.5rem 0;
+        }
+        .thm-section-divider::before, .thm-section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+        }
+        .thm-section-divider.cyan-div::before, .thm-section-divider.cyan-div::after { background: var(--cyan-border); }
+        .thm-section-divider.red-div::before, .thm-section-divider.red-div::after { background: var(--red-border); }
+        .thm-section-divider span {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 0.3rem 1rem;
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+        .thm-section-divider.cyan-div span { color: var(--cyan); border: 1px solid var(--cyan-border); background: rgba(0,212,255,0.05); }
+        .thm-section-divider.red-div span { color: var(--red-primary); border: 1px solid var(--red-border); background: rgba(255,51,51,0.05); }
+
+        .thm-sub-title.red::before { color: var(--red-primary); }
+        .thm-sub-title.red { color: var(--red-dim); }
+
+        .tool-tag.red {
+            background: rgba(255,51,51,0.05);
+            border-color: rgba(255,51,51,0.2);
+            color: var(--red-dim);
+        }
+        .tool-tag.red:hover { background: rgba(255,51,51,0.12); border-color: var(--red-primary); color: var(--red-primary); box-shadow: 0 0 8px rgba(255,51,51,0.2); }
         @media (max-width: 968px) { .thm-wrapper { padding: 2rem 1.5rem; } .roadmap-content { flex-direction: column; } }
 
         /* CONTACT */
@@ -1073,7 +1241,7 @@
             .nav-status { font-size: 0.65rem; }
             .contact-section { padding: 2.5rem 1.5rem; }
             .engagement-card { flex-direction: column; }
-            .engagement-photos { width: 100%; flex-direction: row; height: 260px; }
+            .engagement-photos { width: 100%; flex-direction: row; height: 200px; }
             .engagement-photos .eng-photo { flex: 1; }
             .thm-wrapper { padding: 2rem 1.5rem; }
             .roadmap-content { flex-direction: column; }
@@ -1443,6 +1611,87 @@
                     </div>
                 </div>
 
+                <!-- ====== CYBERSHEET — PROJET PHARE ====== -->
+                <div class="project-card cybersheet-card" style="grid-column: 1 / -1;">
+                    <div class="project-header">
+                        <div class="project-id">OPS-006 // APPLICATION WEB — ANGULAR</div>
+                        <div class="project-status" style="color:var(--green-primary);">ACTIF &amp; MAINTENU</div>
+                    </div>
+
+                    <!-- Screenshot zone -->
+                    <div class="cybersheet-screenshot">
+                        <img src="cybersheet_screenshot.jpg"
+                             alt="CyberSheet — Cheat Sheet Pentesting"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="cybersheet-placeholder">
+                            <div class="cs-placeholder-icon">🖥️</div>
+                            <div class="cs-placeholder-label">cybersheet_screenshot.jpg</div>
+                            <div class="cs-placeholder-sub">1920 × 1080</div>
+                        </div>
+                        <!-- Scan overlay -->
+                        <div class="cybersheet-scan"></div>
+                        <!-- Corner decorations -->
+                        <div class="cs-corner cs-tl"></div>
+                        <div class="cs-corner cs-tr"></div>
+                        <div class="cs-corner cs-bl"></div>
+                        <div class="cs-corner cs-br"></div>
+                    </div>
+
+                    <div class="project-content">
+                        <h3>CyberSheet — Cheat Sheet Pentesting 🛡️</h3>
+                        <p>Application web Angular développée en autonomie pour centraliser toutes les connaissances acquises sur TryHackMe. Référence technique complète pour le pentesting — 54 entrées détaillées couvrant réseau, Linux, Nmap, injections, Metasploit, cryptographie, OSINT, forensics et plus.</p>
+
+                        <!-- Feature grid -->
+                        <div class="cs-features">
+                            <div class="cs-feature">
+                                <div class="cs-feature-icon">📚</div>
+                                <div class="cs-feature-text">
+                                    <div class="cs-feature-title">17 CATÉGORIES</div>
+                                    <div class="cs-feature-desc">Réseau, Linux, Nmap, Web, Burp Suite, Metasploit, Hash Cracking, Privesc, AD, Crypto, Stéganographie, OSINT, Forensics...</div>
+                                </div>
+                            </div>
+                            <div class="cs-feature">
+                                <div class="cs-feature-icon">💉</div>
+                                <div class="cs-feature-text">
+                                    <div class="cs-feature-title">GUIDE INJECTIONS</div>
+                                    <div class="cs-feature-desc">Dictionnaire complet SQLi, XSS, Command Injection, SSTI, XXE, NoSQL, LDAP avec payloads de bypass et scripts Python d'automatisation.</div>
+                                </div>
+                            </div>
+                            <div class="cs-feature">
+                                <div class="cs-feature-icon">🎯</div>
+                                <div class="cs-feature-text">
+                                    <div class="cs-feature-title">CTF TRACKER</div>
+                                    <div class="cs-feature-desc">Suivi de challenges CTF en temps réel : prise de notes structurée, checklist par étape (Recon → Exploit → Privesc → Flag), roadmap intégrée.</div>
+                                </div>
+                            </div>
+                            <div class="cs-feature">
+                                <div class="cs-feature-icon">⚡</div>
+                                <div class="cs-feature-text">
+                                    <div class="cs-feature-title">RECHERCHE INSTANTANÉE</div>
+                                    <div class="cs-feature-desc">Moteur de recherche full-text sur 54 entrées : commandes, tags, descriptions et exemples de code. Résultats en temps réel avec mise en avant du contexte.</div>
+                                </div>
+                            </div>
+                            <div class="cs-feature">
+                                <div class="cs-feature-icon">🧠</div>
+                                <div class="cs-feature-text">
+                                    <div class="cs-feature-title">MODE QUIZ</div>
+                                    <div class="cs-feature-desc">Système de questions-réponses interactif pour tester et consolider ses connaissances en pentesting. Questions générées depuis le contenu du cheat sheet, score et progression suivis.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-tags" style="margin-top:1.2rem;">
+                            <span class="tag">ANGULAR</span>
+                            <span class="tag">TYPESCRIPT</span>
+                            <span class="tag">HTML5 / CSS3</span>
+                            <span class="tag">PENTESTING</span>
+                            <span class="tag">CTF TRACKER</span>
+                            <span class="tag">FULL-TEXT SEARCH</span>
+                            <span class="tag">QUIZ</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -1467,11 +1716,11 @@
                             <div class="cert-badge">VALIDÉ</div>
                         </div>
                         <div class="cert-img-zone">
-                            <img src="cert_presecurity.jpeg" alt="Certificat TryHackMe Pre Security"
+                            <img src="cert_presecurity.png" alt="Certificat TryHackMe Pre Security"
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="cert-img-placeholder" style="display:none;">
                                 <div class="placeholder-icon">🏅</div>
-                                <span>cert_presecurity.jpeg</span>
+                                <span>cert_presecurity.png</span>
                             </div>
                         </div>
                         <div class="cert-info">
@@ -1486,11 +1735,11 @@
                             <div class="cert-badge">VALIDÉ</div>
                         </div>
                         <div class="cert-img-zone">
-                            <img src="cert_cyber101.jpeg" alt="Certificat TryHackMe CyberSecurity 101"
+                            <img src="cert_cyber101.png" alt="Certificat TryHackMe CyberSecurity 101"
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="cert-img-placeholder" style="display:none;">
                                 <div class="placeholder-icon">🏅</div>
-                                <span>cert_cyber101.jpeg</span>
+                                <span>cert_cyber101.png</span>
                             </div>
                         </div>
                         <div class="cert-info">
@@ -1573,13 +1822,145 @@
                     </div>
                 </div>
 
+                
+
+                <!-- ====== SÉPARATEUR RED TEAM ====== -->
+                <div class="thm-section-divider red-div" style="margin-top:2.5rem;">
+                    <span>// RED TEAM &mdash; CERTIFICATIONS OFFENSIVES</span>
+                </div>
+
+                <!-- Nouvelles certifications Red Team -->
+                <div class="thm-sub-title red" style="margin-bottom:1.5rem;">CERTIFICATIONS RED TEAM OBTENUES</div>
+                <div class="thm-certs-row">
+
+                    <div class="cert-card red">
+                        <div class="cert-header">
+                            <div class="cert-id">CERT-003 // JR PENTESTER &mdash; PT1</div>
+                            <div class="cert-badge" style="color:var(--red-primary);">VALID&#xC9;</div>
+                        </div>
+                        <div class="cert-img-zone">
+                            <img src="cert_pt1.jpeg" alt="Certificat TryHackMe Jr Pentester PT1"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="cert-img-placeholder" style="display:none;">
+                                <div class="placeholder-icon" style="color:var(--red-primary);opacity:0.5;">&#x1F6E1;</div>
+                                <span>cert_pt1.jpg</span>
+                            </div>
+                        </div>
+                        <div class="cert-info">
+                            <div class="cert-name">Jr Pentester &mdash; PT1</div>
+                            <div class="cert-platform">TRYHACKME // LEARNING PATH</div>
+                        </div>
+                    </div>
+
+                    <div class="cert-card red">
+                        <div class="cert-header">
+                            <div class="cert-id">CERT-004 // WEB FUNDAMENTALS</div>
+                            <div class="cert-badge" style="color:var(--red-primary);">VALID&#xC9;</div>
+                        </div>
+                        <div class="cert-img-zone">
+                            <img src="cert_webfundamentals.jpeg" alt="Certificat TryHackMe Web Fundamentals"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="cert-img-placeholder" style="display:none;">
+                                <div class="placeholder-icon" style="color:var(--red-primary);opacity:0.5;">&#x1F578;</div>
+                                <span>cert_webfundamentals.jpg</span>
+                            </div>
+                        </div>
+                        <div class="cert-info">
+                            <div class="cert-name">Web Fundamentals</div>
+                            <div class="cert-platform">TRYHACKME // LEARNING PATH</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Compétences Red Team -->
+                <div class="thm-sub-title red">COMP&#xC9;TENCES RED TEAM ACQUISES</div>
+                <div class="thm-modules" style="margin-bottom:2.5rem;">
+
+                    <div class="thm-module red">
+                        <div class="thm-module-title"><span class="mod-icon">&#x1F578;&#xFE0F;</span> Exploitation Web Avanc&#xE9;e</div>
+                        <ul class="thm-skill-list">
+                            <li>Burp Suite &mdash; Repeater, Intruder, Scanner</li>
+                            <li>IDOR &amp; contr&#xF4;le d'acc&#xE8;s bris&#xE9;</li>
+                            <li>File upload vulnerabilities</li>
+                            <li>SSRF &mdash; Server-Side Request Forgery</li>
+                            <li>XXE &mdash; XML External Entity</li>
+                            <li>Deserialization attacks</li>
+                            <li>Contournement d'authentification</li>
+                            <li>Exploitation de sessions &amp; cookies</li>
+                        </ul>
+                    </div>
+
+                    <div class="thm-module red">
+                        <div class="thm-module-title"><span class="mod-icon">&#x1F4A3;</span> Pentesting Offensif</div>
+                        <ul class="thm-skill-list">
+                            <li>M&#xE9;thodologie compl&#xE8;te de pentest</li>
+                            <li>Exploitation Metasploit avanc&#xE9;</li>
+                            <li>Post-exploitation &amp; pivoting r&#xE9;seau</li>
+                            <li>Escalade de privil&#xE8;ges Linux &amp; Windows</li>
+                            <li>Buffer overflow &mdash; bases</li>
+                            <li>Active Directory attacks (Kerberoasting, Pass-the-Hash)</li>
+                            <li>Lateral movement &amp; persistence</li>
+                        </ul>
+                    </div>
+
+                    <div class="thm-module red">
+                        <div class="thm-module-title"><span class="mod-icon">&#x1F4BB;</span> Scripting Red Team</div>
+                        <ul class="thm-skill-list">
+                            <li>Scripts Python offensifs</li>
+                            <li>Reverse shells avanc&#xE9;s (stageless, staged)</li>
+                            <li>Custom payloads &amp; encodage (msfvenom)</li>
+                            <li>PowerShell offensif</li>
+                            <li>Living off the land (LOLBins)</li>
+                            <li>Automatisation de scans &amp; exploits</li>
+                        </ul>
+                    </div>
+
+                    <div class="thm-module red">
+                        <div class="thm-module-title"><span class="mod-icon">&#x1F50E;</span> Reconnaissance Avanc&#xE9;e</div>
+                        <ul class="thm-skill-list">
+                            <li>Footprinting actif &amp; passif</li>
+                            <li>Subdomain enumeration</li>
+                            <li>Google dorking avanc&#xE9;</li>
+                            <li>Whois, Shodan, Censys</li>
+                            <li>OSINT web &amp; r&#xE9;seaux sociaux</li>
+                            <li>Cartographie d'infrastructure cible</li>
+                        </ul>
+                    </div>
+
+                    <div class="thm-module red">
+                        <div class="thm-module-title"><span class="mod-icon">&#x1F6E1;&#xFE0F;</span> &#xC9;vasion &amp; Discr&#xE9;tion</div>
+                        <ul class="thm-skill-list">
+                            <li>&#xC9;vasion d'antivirus &amp; EDR &mdash; notions</li>
+                            <li>Obfuscation de payloads</li>
+                            <li>Contournement de WAF</li>
+                            <li>Traffic tunneling (DNS, HTTP)</li>
+                            <li>OPSEC &mdash; techniques de discr&#xE9;tion</li>
+                        </ul>
+                    </div>
+
+                    <div class="thm-module red">
+                        <div class="thm-module-title"><span class="mod-icon">&#x1F4DD;</span> Reporting Pentest</div>
+                        <ul class="thm-skill-list">
+                            <li>R&#xE9;daction de rapports de pentest</li>
+                            <li>Classification des vuln&#xE9;rabilit&#xE9;s (CVSS)</li>
+                            <li>OWASP Testing Guide</li>
+                            <li>MITRE ATT&amp;CK &mdash; bases</li>
+                            <li>Recommandations de rem&#xE9;diation</li>
+                            <li>Documentation des preuves d'exploitation (PoC)</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
                 <div class="thm-tools-section">
                     <div class="thm-sub-title">ARSENAL D'OUTILS MAÎTRISÉS</div>
                     <div class="tools-cloud">
                         <span class="tool-tag">Nmap</span>
                         <span class="tool-tag">Wireshark</span>
-                        <span class="tool-tag">Burp Suite</span>
-                        <span class="tool-tag">Metasploit</span>
+                        <span class="tool-tag">Burp Suite Pro</span>
+                        <span class="tool-tag">Metasploit (avanc&#xE9;)</span>
                         <span class="tool-tag">Gobuster</span>
                         <span class="tool-tag">Hydra</span>
                         <span class="tool-tag">John the Ripper</span>
@@ -1597,38 +1978,10 @@
                         <span class="tool-tag">TryHackMe AttackBox</span>
                         <span class="tool-tag">GTFOBins</span>
                         <span class="tool-tag">CyberChef</span>
+                        <span class="tool-tag">Msfvenom</span>
                     </div>
                 </div>
 
-                <div class="thm-roadmap">
-                    <div class="hud-corner tl" style="border-color:var(--amber)"></div>
-                    <div class="hud-corner tr" style="border-color:var(--amber)"></div>
-                    <div class="hud-corner bl" style="border-color:var(--amber)"></div>
-                    <div class="hud-corner br" style="border-color:var(--amber)"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-icon">🎯</div>
-                        <div class="roadmap-text">
-                            <div class="roadmap-cert-name">JR PENTESTER &mdash; PT1</div>
-                            <div class="roadmap-cert-full">TRYHACKME // JUNIOR PENETRATION TESTER PATH</div>
-                            <p class="roadmap-desc">
-                                Après avoir validé les fondamentaux avec Pre Security et CyberSecurity 101, ma prochaine étape est la certification Jr Pentester (PT1). Ce parcours approfondit les techniques offensives avancées : exploitation de vulnérabilités, post-exploitation, pivoting réseau, et méthodologie complète de test d'intrusion &mdash; compétences directement alignées avec mon orientation vers la cybersécurité offensive.
-                            </p>
-                            <div class="roadmap-status">
-                                <span class="status-pill in-progress">⚡ EN COURS</span>
-                                <span class="status-pill target">CIBLE : 2026</span>
-                            </div>
-                            <div class="roadmap-progress">
-                                <div class="progress-label">
-                                    <span>PROGRESSION</span>
-                                    <span style="color:var(--amber)">~60%</span>
-                                </div>
-                                <div class="progress-track">
-                                    <div class="progress-fill"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </section>
@@ -1746,7 +2099,7 @@
             let iterations = 0;
             const interval = setInterval(() => {
                 logo.textContent = original.split('').map((char, i) => {
-                    if (i < iterations) return original[i];
+                    nal[i];
                     return chars[Math.floor(Math.random() * chars.length)];
                 }).join('');
                 if (iterations >= original.length) clearInterval(interval);
