@@ -712,9 +712,15 @@
         .cs-corner.cs-br { bottom: 8px; right: 8px; border-bottom: 2px solid var(--green-primary); border-right: 2px solid var(--green-primary); }
         .cs-features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.8rem;
             margin-top: 1.4rem;
+        }
+        @media (max-width: 1200px) {
+            .cs-features { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .cs-features { grid-template-columns: 1fr; }
         }
         .cs-feature {
             display: flex;
@@ -1716,11 +1722,11 @@
                             <div class="cert-badge">VALIDÉ</div>
                         </div>
                         <div class="cert-img-zone">
-                            <img src="cert_presecurity.png" alt="Certificat TryHackMe Pre Security"
+                            <img src="cert_presecurity.jpeg" alt="Certificat TryHackMe Pre Security"
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="cert-img-placeholder" style="display:none;">
                                 <div class="placeholder-icon">🏅</div>
-                                <span>cert_presecurity.png</span>
+                                <span>cert_presecurity.jpeg</span>
                             </div>
                         </div>
                         <div class="cert-info">
@@ -1735,11 +1741,11 @@
                             <div class="cert-badge">VALIDÉ</div>
                         </div>
                         <div class="cert-img-zone">
-                            <img src="cert_cyber101.png" alt="Certificat TryHackMe CyberSecurity 101"
+                            <img src="cert_cyber101.jpeg" alt="Certificat TryHackMe CyberSecurity 101"
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="cert-img-placeholder" style="display:none;">
                                 <div class="placeholder-icon">🏅</div>
-                                <span>cert_cyber101.png</span>
+                                <span>cert_cyber101.jpeg</span>
                             </div>
                         </div>
                         <div class="cert-info">
@@ -1839,7 +1845,7 @@
                             <div class="cert-badge" style="color:var(--red-primary);">VALID&#xC9;</div>
                         </div>
                         <div class="cert-img-zone">
-                            <img src="cert_pt1.jpeg" alt="Certificat TryHackMe Jr Pentester PT1"
+                            <img src="cert_pt1.jpg" alt="Certificat TryHackMe Jr Pentester PT1"
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="cert-img-placeholder" style="display:none;">
                                 <div class="placeholder-icon" style="color:var(--red-primary);opacity:0.5;">&#x1F6E1;</div>
@@ -1858,7 +1864,7 @@
                             <div class="cert-badge" style="color:var(--red-primary);">VALID&#xC9;</div>
                         </div>
                         <div class="cert-img-zone">
-                            <img src="cert_webfundamentals.jpeg" alt="Certificat TryHackMe Web Fundamentals"
+                            <img src="cert_webfundamentals.jpg" alt="Certificat TryHackMe Web Fundamentals"
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="cert-img-placeholder" style="display:none;">
                                 <div class="placeholder-icon" style="color:var(--red-primary);opacity:0.5;">&#x1F578;</div>
